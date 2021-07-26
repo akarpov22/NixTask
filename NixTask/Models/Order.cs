@@ -14,6 +14,12 @@ namespace NixTask.Models
                 if (order.ID == ID)
                     OrderBase.Orders.Remove(order);
         }
+        public void Complete(int ID)
+        {
+            foreach (Order order in OrderBase.Orders)
+                if (order.ID == ID)
+                    order.Status = true;
+        }
     }
     public class Order
     {
@@ -22,6 +28,7 @@ namespace NixTask.Models
         public List<(Product product, int Count)> Position { get; set; }
         public string Comments { get; set; }
         private Client _client;
+        public bool Status = false;
         public DateTime? CreatorDate 
         {
             get { return _creatorDate; }
